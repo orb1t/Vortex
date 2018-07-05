@@ -17,6 +17,7 @@ target/
 *~
 .DS_Store
 .classpath
+.factorypath
 .project
 
 # -----------------------------------------------------------------------------
@@ -24,3 +25,4 @@ target/
 #
 
 res/data/*
+vortex.json

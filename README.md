@@ -1,4 +1,4 @@
-[![...](res/image/readme-header.png)]()
+[![...](res/image/readme-header.png)](https://github.com/agustin-golmar/Vortex/blob/master/doc/(2018)%20Computational%20Fluid%20Dynamics.docx)
 [![...](https://img.shields.io/badge/license-WTFPL%20v2.0-red.svg)](https://github.com/agustin-golmar/Vortex/blob/master/LICENSE.md)
 [![...](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/agustin-golmar/Vortex/releases)
 [![...](https://www.travis-ci.com/agustin-golmar/Vortex.svg?branch=master)](https://www.travis-ci.com/agustin-golmar/Vortex)
@@ -28,23 +28,42 @@ $ rm -fr ~/.m2/repository/ar/nadezhda/*
 
 Or do it manually, if you prefer.
 
+> __NOTE:__ If you wish to import this project in _Eclipse IDE_, you should
+> install the [m2e-apt](https://marketplace.eclipse.org/content/m2e-apt)
+> plugin. This way, _Dagger_ will compile the modules and components
+> automatically.
+
 ## Execution
 
 In the root folder, type:
 
 ```
-$ java -jar vortex.jar <arguments>
+$ java -jar vortex.jar <mode>
 ```
 
-Where the arguments can be:
+Where _\<mode\>_ can be:
 
-* `-option`: Description.
+* `simulation`: Runs a complete simulation of the specified system in
+configuration.
+
+## Configuration
+
+The configuration must be in a file named `vortex.json`, located in the root
+folder. It must contain the follow properties:
+
+```
+{
+}
+```
 
 ## Libraries
 
 This application uses these _Java_ libraries to complete its task:
 
-* __[Library v3.7](...)__: Description.
+* __[Dagger v2.16](https://google.github.io/dagger/)__: As the fully static DI
+framework.
+* __[Jackson v2.9.6]((https://github.com/FasterXML/jackson)__: For reading the
+JSON configuration.
 
 ## Designer
 

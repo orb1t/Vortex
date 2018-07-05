@@ -28,10 +28,42 @@
 		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
+		<dagger.version>2.16</dagger.version>
+		<dagger-compiler.version>2.16</dagger-compiler.version>
+		<jackson-annotations.version>2.9.6</jackson-annotations.version>
+		<jackson-core.version>2.9.6</jackson-core.version>
+		<jackson-databind.version>2.9.6</jackson-databind.version>
+		<javax.inject.version>1</javax.inject.version>
 	</properties>
 
 	<!-- Dependencies -->
-	<dependencies></dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.dagger</groupId>
+			<artifactId>dagger</artifactId>
+			<version>${dagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson-annotations.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-databind.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.inject.version}</version>
+		</dependency>
+	</dependencies>
 
 	<!-- Plugins -->
 	<build>
@@ -76,6 +108,13 @@
 						<version>${java.version}</version>
 					</jdkToolchain>
 					<useIncrementalCompilation>false</useIncrementalCompilation>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>com.google.dagger</groupId>
+							<artifactId>dagger-compiler</artifactId>
+							<version>${dagger-compiler.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 				<dependencies>
 					<dependency>
