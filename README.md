@@ -5,9 +5,9 @@
 
 # Vortex
 
-An implementation of the FHP model (with 6 velocity degrees of freedom), based
-on cellular automatons, for the simulation of a 2D fluid. This model can solve
-the Navier-Stokes equation for an incompressible flow.
+An implementation of the _FHP model_ (with 6 velocity degrees of freedom),
+based on _cellular automatons_, for the simulation of a 2D fluid. This model
+can solve the _Navier-Stokes equation_ for an incompressible flow.
 
 ## Build
 
@@ -46,10 +46,19 @@ Where _\<mode\>_ can be:
 * `simulation`: Runs a complete simulation of the specified system in
 configuration.
 
+If you want to change the logging mechanism, simply call the application with:
+
+```
+$ java -Dlogback.configurationFile=logback.xml -jar vortex.jar <mode>
+```
+
+Where `logback.xml` is the configuration file. You can change this and use
+whatever other file you want. By default, _Vortex_ will log to the console.
+
 ## Configuration
 
 The configuration must be in a file named `vortex.json`, located in the root
-folder. It must contain the follow properties:
+folder. It must contain the following properties:
 
 ```
 {
@@ -62,7 +71,7 @@ This application uses these _Java_ libraries to complete its task:
 
 * __[Dagger v2.16](https://google.github.io/dagger/)__: As the fully static DI
 framework.
-* __[Jackson v2.9.6]((https://github.com/FasterXML/jackson)__: For reading the
+* __[Jackson v2.9.6](https://github.com/FasterXML/jackson)__: For reading the
 JSON configuration.
 
 ## Designer

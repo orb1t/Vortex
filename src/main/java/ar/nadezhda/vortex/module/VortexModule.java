@@ -5,19 +5,28 @@
 	import ar.nadezhda.vortex.config.Configurator;
 	import ar.nadezhda.vortex.core.FHPModel;
 	import ar.nadezhda.vortex.interfaces.CFPModel;
+	import ar.nadezhda.vortex.interfaces.Mode;
+	import ar.nadezhda.vortex.mode.None;
+	import ar.nadezhda.vortex.mode.Simulation;
+	import ar.nadezhda.vortex.qualifier.CLI;
 	import ar.nadezhda.vortex.qualifier.FHP;
+	import ar.nadezhda.vortex.support.ClassBuilder;
 	import ar.nadezhda.vortex.support.Message;
-	import com.fasterxml.jackson.core.JsonParseException;
-	import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 	import dagger.Module;
 	import dagger.Provides;
-	import java.io.FileNotFoundException;
-	import java.io.IOException;
+	import java.lang.reflect.InvocationTargetException;
+	import java.util.NoSuchElementException;
+	import javax.inject.Singleton;
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
 
 	@Module
 	public class VortexModule {
 
 		public static final String CONFIGURATION_FILENAME = "vortex.json";
+
+		protected static final Logger logger
+			= LoggerFactory.getLogger(VortexModule.class);
 
 		@Provides @FHP
 		public CFPModel provideCFPModel(final FHPModel model) {
@@ -25,23 +34,49 @@
 		}
 
 		@Provides
-		public Configuration provideConfiguration() {
-			try {
-				return Configurator.load(CONFIGURATION_FILENAME);
+		public Configuration provideConfiguration(
+				final Configurator configurator) {
+			return configurator.getConfig();
+		}
+
+		@Provides @Singleton
+		public Configurator provideConfigurator() {
+			return new Configurator(CONFIGURATION_FILENAME);
+		}
+
+		@Provides
+		public Mode provideMode(
+				@CLI final String [] arguments, final Configuration config,
+				@FHP final Simulation simulation) {
+			if (0 < arguments.length) {
+				final String mode = ClassBuilder
+						.getFullyQualifiedClassName(
+							Simulation.class.getPackageName(), arguments[0]);
+				if (mode.equals(Simulation.class.getCanonicalName())) {
+					return simulation;
+				}
+				else try {
+					return (Mode) ClassBuilder
+						.getConstructor(mode, Configuration.class)
+						.orElseThrow()
+						.newInstance(config);
+				}
+				catch (final InstantiationException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException
+						| NoSuchElementException exception) {
+					logger.error(Message.UNKNOWN_MODE, arguments[0]);
+					return new None();
+				}
 			}
-			catch (final FileNotFoundException exception) {
-				System.err.println(Message.CONFIG_FILE_NOT_FOUND);
+			else {
+				logger.error(Message.UNSPECIFIED_MODE);
+				return new None();
 			}
-			catch (final JsonParseException exception) {
-				System.err.println(Message.CONFIG_INVALID_FORMAT);
-			}
-			catch (final UnrecognizedPropertyException exception) {
-				System.err.println(Message.CONFIG_UNRECOGNIZED_PROPERTY);
-			}
-			catch (final IOException exception) {
-				System.err.println(Message.CONFIG_UNKNOWN_ERROR);
-			}
-			System.err.println(Message.USING_DEFAULT_CONFIG);
-			return Configurator.getDefault();
+		}
+
+		@Provides @FHP
+		public Simulation provideSimulation(
+				final Configuration config, final FHPModel model) {
+			return new Simulation(config, model);
 		}
 	}
