@@ -1,4 +1,4 @@
-[![...](res/image/readme-header.png)](https://github.com/agustin-golmar/Vortex/blob/master/doc/(2018)%20Computational%20Fluid%20Dynamics.docx)
+[![...](res/image/readme-header.png)](https://github.com/agustin-golmar/Vortex/blob/master/doc/(2018)%20Computational%20Fluid%20Dynamics.pdf)
 [![...](https://img.shields.io/badge/license-WTFPL%20v2.0-red.svg)](https://github.com/agustin-golmar/Vortex/blob/master/LICENSE.md)
 [![...](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/agustin-golmar/Vortex/releases)
 [![...](https://www.travis-ci.com/agustin-golmar/Vortex.svg?branch=master)](https://www.travis-ci.com/agustin-golmar/Vortex)
@@ -75,7 +75,9 @@ folder. It must contain the following properties:
     "momentum"      : "left-to-right",
     "ratio"         : 0.1,
 
-    "cuda"          : false
+    "seed"          : 35265826342033,
+    "cuda"          : false,
+    "saveAutomaton" : false
 }
 ```
 
@@ -83,6 +85,8 @@ folder. It must contain the following properties:
 
 This application uses these _Java_ libraries to complete its task:
 
+* __[Apache Commons-Math v3.6.1](http://commons.apache.org/proper/commons-math/)__:
+Because it has the _Mersenne Twister PRNG_, which is more uniform than _LCG_.
 * __[Dagger v2.16](https://google.github.io/dagger/)__: As the fully static DI
 framework.
 * __[Jackson v2.9.6](https://github.com/FasterXML/jackson)__: For reading the

@@ -17,6 +17,8 @@
 	import java.lang.reflect.InvocationTargetException;
 	import java.util.NoSuchElementException;
 	import javax.inject.Singleton;
+	import org.apache.commons.math3.random.MersenneTwister;
+	import org.apache.commons.math3.random.RandomGenerator;
 	import org.slf4j.Logger;
 	import org.slf4j.LoggerFactory;
 
@@ -42,6 +44,11 @@
 		@Provides @Singleton
 		public Configurator provideConfigurator() {
 			return new Configurator(CONFIGURATION_FILENAME);
+		}
+
+		@Provides @Singleton
+		public RandomGenerator provide(final Configuration config) {
+			return new MersenneTwister(config.getSeed());
 		}
 
 		@Provides

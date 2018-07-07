@@ -30,6 +30,7 @@
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
 		<!-- Dependencies -->
+		<commons-math3.version>3.6.1</commons-math3.version>
 		<dagger-compiler.version>2.16</dagger-compiler.version>
 		<dagger.version>2.16</dagger.version>
 		<jackson-annotations.version>2.9.6</jackson-annotations.version>
@@ -77,6 +78,11 @@
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>${javax.inject.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>${commons-math3.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
