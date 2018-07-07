@@ -62,6 +62,20 @@ folder. It must contain the following properties:
 
 ```
 {
+    "shape"         : "res/shape/barrier.shape",
+    "output"        : "res/data/output",
+
+    "lattice"       : [1920, 1080],
+    "dimension"     : [1.0, 1.0],
+    "steps"         : 100000,
+    "window"        : 100,
+    "average"       : 32,
+
+    "contour"       : "non-periodic",
+    "momentum"      : "left-to-right",
+    "ratio"         : 0.1,
+
+    "cuda"          : false
 }
 ```
 
@@ -73,6 +87,9 @@ This application uses these _Java_ libraries to complete its task:
 framework.
 * __[Jackson v2.9.6](https://github.com/FasterXML/jackson)__: For reading the
 JSON configuration.
+* __[Logback v1.3.0-alpha4](https://logback.qos.ch/)__: As the logger
+infrastructure.
+* __[SFL4J v1.8.0-beta2](https://www.slf4j.org/)__: The facade of the logger.
 
 ## Designer
 
@@ -82,4 +99,16 @@ This project has been built, designed and maintained by:
 
 ## Bibliography
 
-__"Title"__. Authors. _ISBN. Date_.
+__"Introduction To Practice Of Molecular Simulation"__. Akira Satoh. _Elsevier
+Inc. ISBN 978-0-12-385148-2. Akita Prefectural University, Japan. 2011_.
+
+__"Lattice Boltzmann Modeling"__. Michael C. Sukop, Daniel T. Thorne Jr.
+_Springer-Verlag Berlin Heidelberg. ISBN 978-3-540-27982-2. USA. 2006_.
+
+__"Lattice-Gas Cellular Automata And Lattice Boltzmann Models - An
+Introduction"__. Dieter A. Wolf-Gladrow. _Springer. Alfred Wegener Institute
+for Polar and Marine, Germany. June 26, 2005_.
+
+__"Cellular Automata As Models Of Complexity"__. Stephen Wolfram. _Nature,
+Vol. 311, N° 5985. Macmillan Journals, 1985. The Institute For Advanced Study,
+Princeton, New Jersey, USA. October 4, 1984_.

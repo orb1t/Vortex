@@ -21,4 +21,7 @@
 			= "Unknown mode ('{}'). See usage.";
 		public static final String UNSPECIFIED_MODE
 			= "The mode wasn't specified.";
+
+		public static final String CONFIGURATION
+			= "Configuration:\n{}";
 	}

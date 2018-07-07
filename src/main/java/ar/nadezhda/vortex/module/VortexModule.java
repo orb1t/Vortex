@@ -53,25 +53,25 @@
 						.getFullyQualifiedClassName(
 							Simulation.class.getPackageName(), arguments[0]);
 				if (mode.equals(Simulation.class.getCanonicalName())) {
+					logger.info(Message.CONFIGURATION, config.toString());
 					return simulation;
 				}
 				else try {
-					return (Mode) ClassBuilder
+					final Mode instance = (Mode) ClassBuilder
 						.getConstructor(mode, Configuration.class)
 						.orElseThrow()
 						.newInstance(config);
+					logger.info(Message.CONFIGURATION, config.toString());
+					return instance;
 				}
 				catch (final InstantiationException | IllegalAccessException
 						| IllegalArgumentException | InvocationTargetException
 						| NoSuchElementException exception) {
 					logger.error(Message.UNKNOWN_MODE, arguments[0]);
-					return new None();
 				}
 			}
-			else {
-				logger.error(Message.UNSPECIFIED_MODE);
-				return new None();
-			}
+			else logger.error(Message.UNSPECIFIED_MODE);
+			return new None();
 		}
 
 		@Provides @FHP
