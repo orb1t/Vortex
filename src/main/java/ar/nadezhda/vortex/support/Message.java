@@ -24,4 +24,12 @@
 
 		public static final String CONFIGURATION
 			= "Configuration:\n{}";
+
+		public static final String FINISH_TIME
+			= "Finish in {} secs.";
+
+		public static final String SIMULATION
+			= "Simulating...";
+		public static final String ANIMATION
+			= "Animating...";
 	}

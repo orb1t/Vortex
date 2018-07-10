@@ -4,7 +4,6 @@
 	import ar.nadezhda.vortex.interfaces.Mode;
 	import ar.nadezhda.vortex.module.VortexModule;
 	import ar.nadezhda.vortex.qualifier.CLI;
-	import ar.nadezhda.vortex.qualifier.FHP;
 	import dagger.BindsInstance;
 	import dagger.Component;
 	import javax.inject.Singleton;
@@ -13,7 +12,6 @@
 	@Component(modules = VortexModule.class)
 	public interface VortexComponent {
 
-		@FHP
 		public Mode getMode();
 
 		@Component.Builder

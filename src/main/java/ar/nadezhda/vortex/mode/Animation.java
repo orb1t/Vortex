@@ -3,6 +3,7 @@
 
 	import ar.nadezhda.vortex.config.Configuration;
 	import ar.nadezhda.vortex.interfaces.Mode;
+	import ar.nadezhda.vortex.support.Message;
 	import org.slf4j.Logger;
 	import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@
 
 		@Override
 		public Mode run() {
-			logger.info("Animation...");
+			logger.info(Message.ANIMATION);
 			return this;
 		}
 	}

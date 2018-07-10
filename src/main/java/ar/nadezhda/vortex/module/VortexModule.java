@@ -3,13 +3,13 @@
 
 	import ar.nadezhda.vortex.config.Configuration;
 	import ar.nadezhda.vortex.config.Configurator;
-	import ar.nadezhda.vortex.core.FHPModel;
-	import ar.nadezhda.vortex.interfaces.CFPModel;
+	import ar.nadezhda.vortex.core.CUDACluster;
+	import ar.nadezhda.vortex.core.ThreadCluster;
+	import ar.nadezhda.vortex.interfaces.Cluster;
 	import ar.nadezhda.vortex.interfaces.Mode;
 	import ar.nadezhda.vortex.mode.None;
 	import ar.nadezhda.vortex.mode.Simulation;
 	import ar.nadezhda.vortex.qualifier.CLI;
-	import ar.nadezhda.vortex.qualifier.FHP;
 	import ar.nadezhda.vortex.support.ClassBuilder;
 	import ar.nadezhda.vortex.support.Message;
 	import dagger.Module;
@@ -30,9 +30,15 @@
 		protected static final Logger logger
 			= LoggerFactory.getLogger(VortexModule.class);
 
-		@Provides @FHP
-		public CFPModel provideCFPModel(final FHPModel model) {
-			return model;
+		@Provides @Singleton
+		public Cluster provideCluster(final Configuration config) {
+			if (config.useCuda()) {
+				return new CUDACluster();
+			}
+			else if (0 < config.getWorkers()) {
+				return new ThreadCluster(config.getWorkers());
+			}
+			else return new ThreadCluster();
 		}
 
 		@Provides
@@ -54,7 +60,7 @@
 		@Provides
 		public Mode provideMode(
 				@CLI final String [] arguments, final Configuration config,
-				@FHP final Simulation simulation) {
+				final Simulation simulation) {
 			if (0 < arguments.length) {
 				final String mode = ClassBuilder
 						.getFullyQualifiedClassName(
@@ -81,9 +87,9 @@
 			return new None();
 		}
 
-		@Provides @FHP
+		@Provides
 		public Simulation provideSimulation(
-				final Configuration config, final FHPModel model) {
-			return new Simulation(config, model);
+				final Configuration config, final Cluster cluster) {
+			return new Simulation(config, cluster);
 		}
 	}

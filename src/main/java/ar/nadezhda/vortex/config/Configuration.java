@@ -22,6 +22,7 @@
 		protected double ratio = 0.1;
 
 		protected long seed = System.nanoTime();
+		protected int workers = 0;
 		@JsonProperty("cuda")
 		protected boolean cuda = true;
 		@JsonProperty("saveAutomaton")
@@ -71,6 +72,10 @@
 			return seed;
 		}
 
+		public int getWorkers() {
+			return workers;
+		}
+
 		public boolean useCuda() {
 			return cuda;
 		}
@@ -93,6 +98,8 @@
 					.append("\n\tmomentum        : ").append(momentum)
 					.append("\n\tratio           : ").append(100.0 * ratio)
 					.append(" %\n\tseed            : ").append(seed)
+					.append("\n\tworkers         : ")
+					.append(0 < workers? workers : Runtime.getRuntime().availableProcessors())
 					.append("\n\tUse CUDA        : ").append(cuda)
 					.append("\n\tSave automaton? : ").append(saveAutomaton)
 					.append("\n")

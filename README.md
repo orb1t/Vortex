@@ -76,6 +76,7 @@ folder. It must contain the following properties:
     "ratio"         : 0.1,
 
     "seed"          : 35265826342033,
+    "workers"       : 0,
     "cuda"          : false,
     "saveAutomaton" : false
 }
